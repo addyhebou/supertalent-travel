@@ -13,9 +13,14 @@ export function HeroSection() {
           "repeating-linear-gradient(135deg, #ece5d8, #ece5d8 14px, #e2d9c8 14px, #e2d9c8 28px)",
       }}
     >
-      <div className="absolute inset-0 flex items-center justify-center font-mono text-[12px] tracking-[0.05em] text-disabled-text">
-        hero: full-bleed pool/beach photo or video loop
-      </div>
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="https://res.cloudinary.com/sqlym0db/video/upload/v1787092872/video_overlay.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
       <div
         className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-9 pb-[88px]"
         style={{
