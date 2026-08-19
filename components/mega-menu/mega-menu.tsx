@@ -3,13 +3,17 @@
 import dynamic from "next/dynamic";
 import type { NavCategory } from "@/lib/nav-items";
 import type { DateRange } from "@/components/shell/app-shell";
-import { PlaceholderPanel } from "./placeholder-panel";
 import { MegaMenuErrorBoundary } from "./mega-menu-error-boundary";
 
 // Not needed on initial paint — code-split so the brand list, city panel,
 // and calendar bundle only loads on the user's first mega-menu interaction.
 const GlobalChainsPanel = dynamic(
   () => import("./global-chains-panel").then((m) => m.GlobalChainsPanel),
+  { ssr: false },
+);
+
+const StaticMenuPanel = dynamic(
+  () => import("./static-menu-panel").then((m) => m.StaticMenuPanel),
   { ssr: false },
 );
 
@@ -49,7 +53,7 @@ export function MegaMenu({
               onSearch={onSearch}
             />
           ) : (
-            <PlaceholderPanel category={activeCategory} />
+            <StaticMenuPanel category={activeCategory} />
           )}
         </MegaMenuErrorBoundary>
       </div>
