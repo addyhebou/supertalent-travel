@@ -20,8 +20,11 @@ export function PrimaryNav({
             onClick={() => onOpenCategory(item)}
             className="border-b-[1.5px] pb-1 text-[12px] font-semibold tracking-[0.1em] uppercase transition-colors"
             style={{
-              color: isActive ? "var(--color-accent)" : "var(--color-ink)",
-              borderBottomColor: isActive ? "var(--color-accent)" : "transparent",
+              color: isActive ? 'var(--color-accent)' : 'var(--color-ink)',
+              borderBottomColor: isActive
+                ? 'var(--color-accent)'
+                : 'transparent',
+              cursor: 'pointer',
             }}
           >
             {item}
