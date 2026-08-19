@@ -80,14 +80,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const isMenuOpen = activeCategory !== null;
-
   return (
     <>
       <div onMouseLeave={closeMenus} className="fixed inset-x-0 top-0 z-[60]">
         <Header
-          isMenuOpen={isMenuOpen}
-          isSearchOpen={isSearchOpen}
           activeCategory={activeCategory}
           onOpenCategory={openCategory}
           onToggleSearch={toggleSearch}

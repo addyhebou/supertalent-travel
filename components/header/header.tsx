@@ -1,39 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Logo } from "./logo";
 import { SearchTrigger } from "./search-trigger";
 import { AccountCartIcons } from "./account-cart-icons";
 import { PrimaryNav } from "./primary-nav";
 import type { NavCategory } from "@/lib/nav-items";
 
-function useIsScrolled(threshold = 30) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > threshold);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [threshold]);
-  return isScrolled;
-}
-
 export function Header({
-  isMenuOpen,
-  isSearchOpen,
   activeCategory,
   onOpenCategory,
   onToggleSearch,
 }: {
-  isMenuOpen: boolean;
-  isSearchOpen: boolean;
   activeCategory: NavCategory | null;
   onOpenCategory: (category: NavCategory) => void;
   onToggleSearch: () => void;
 }) {
-  const isScrolled = useIsScrolled();
-  const solid = isScrolled || isMenuOpen || isSearchOpen;
-
   return (
     <header
       className="transition-[background,box-shadow] duration-[250ms] ease-out"

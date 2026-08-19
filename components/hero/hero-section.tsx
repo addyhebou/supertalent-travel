@@ -8,18 +8,20 @@ const VIDEO_SRC =
 const IMAGE_SRC =
   'https://res.cloudinary.com/sqlym0db/image/upload/f_auto,q_auto/v1787150108/Screenshot_2026-08-19_at_10.34.01_AM.png';
 
+type NetworkInformation = {
+  saveData?: boolean;
+  effectiveType?: string;
+};
+
 function isSlowConnection() {
   if (typeof navigator === 'undefined') return false;
-  const connection = (navigator as any).connection;
+  const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
   if (!connection) return false;
-  return (
-    connection.saveData ||
-    ['slow-2g', '2g', '3g'].includes(connection.effectiveType)
-  );
+  return Boolean(connection.saveData) || ['slow-2g', '2g', '3g'].includes(connection.effectiveType ?? '');
 }
 
 export function HeroSection() {
-  const [showVideo, setShowVideo] = useState(() => !isSlowConnection());
+  const [showVideo] = useState(() => !isSlowConnection());
 
   const scrollToJourney = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
