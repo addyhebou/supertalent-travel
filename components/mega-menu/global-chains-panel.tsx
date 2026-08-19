@@ -29,30 +29,36 @@ export function GlobalChainsPanel({
   const { data: brands } = useBrands();
   const activeBrand = brands?.find((b) => b.id === activeBrandId) ?? null;
 
-  return (
-    <div>
-      <div className="mb-9">
+  if (!activeBrand) {
+    return (
+      <div>
         <div className="mb-5 text-[10.5px] font-semibold tracking-[0.14em] text-muted">BRANDS</div>
-        <BrandList activeBrandId={activeBrandId} onSelectBrand={onSelectBrand} />
+        <BrandList activeBrandId={activeBrandId} onSelectBrand={onSelectBrand} columns={6} />
       </div>
+    );
+  }
 
-      {activeBrand ? (
-        <div className="grid grid-cols-[1fr_2fr] gap-14 border-t border-line pt-9">
-          <div>
-            <div className="mb-4 text-[10.5px] font-semibold tracking-[0.14em] text-muted">
-              {activeBrand.name.toUpperCase()} — CITIES
-            </div>
-            <CityPanel brandId={activeBrand.id} selectedCityId={selectedCityId} onSelectCity={onSelectCity} />
-          </div>
-          {selectedCityId ? (
-            <DatesPanel dateRange={dateRange} onPickDay={onPickDay} onSearch={onSearch} />
-          ) : (
-            <div className="flex items-center text-[14px] italic text-placeholder">
-              Select a city to see dates
-            </div>
-          )}
+  return (
+    <div className="grid grid-cols-[1.4fr_1fr_2.2fr] gap-14">
+      <div>
+        <div className="mb-5 text-[10.5px] font-semibold tracking-[0.14em] text-muted">BRANDS</div>
+        <div className="max-h-[380px] overflow-y-auto pr-2">
+          <BrandList activeBrandId={activeBrandId} onSelectBrand={onSelectBrand} columns={2} />
         </div>
-      ) : null}
+      </div>
+      <div>
+        <div className="mb-4 text-[10.5px] font-semibold tracking-[0.14em] text-muted">
+          {activeBrand.name.toUpperCase()} — CITIES
+        </div>
+        <CityPanel brandId={activeBrand.id} selectedCityId={selectedCityId} onSelectCity={onSelectCity} />
+      </div>
+      {selectedCityId ? (
+        <DatesPanel dateRange={dateRange} onPickDay={onPickDay} onSearch={onSearch} />
+      ) : (
+        <div className="flex items-center text-[14px] italic text-placeholder">
+          Select a city to see dates
+        </div>
+      )}
     </div>
   );
 }

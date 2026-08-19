@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useCities } from "@/hooks/use-cities";
 
 export function CityPanel({
@@ -12,6 +13,16 @@ export function CityPanel({
   onSelectCity: (cityId: string) => void;
 }) {
   const { data: cities, isPending, isError } = useCities(brandId);
+
+  // Auto-select the first city as soon as a brand's cities load, so the
+  // dates panel appears alongside the city list instead of waiting on an
+  // extra click — selectedCityId is reset to null on every brand change,
+  // which is what re-arms this for the newly active brand.
+  useEffect(() => {
+    if (!selectedCityId && cities && cities.length > 0) {
+      onSelectCity(cities[0].id);
+    }
+  }, [cities, selectedCityId, onSelectCity]);
 
   if (isPending) {
     return (
