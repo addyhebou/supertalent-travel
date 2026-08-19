@@ -38,8 +38,8 @@ export function Header({
     <header
       className="transition-[background,box-shadow] duration-[250ms] ease-out"
       style={{
-        background: solid ? "var(--color-paper)" : "transparent",
-        boxShadow: solid ? "0 1px 0 rgba(33,29,25,0.08)" : "none",
+        background: 'var(--color-paper)',
+        boxShadow: '0 1px 0 rgba(33,29,25,0.08)',
       }}
     >
       <div className="grid h-[84px] grid-cols-[1fr_auto_1fr] items-center px-12">
